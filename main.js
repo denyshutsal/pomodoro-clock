@@ -1,31 +1,36 @@
 "use script";
 
-const breakBtnMinus = document.querySelector(".breakBtnMinus");
-const breakBtnPlus = document.querySelector(".breakBtnPlus");
-const workBtnMinus = document.querySelector(".workBtnMinus");
-const workBtnPlus = document.querySelector(".workBtnPlus");
-const workTime = document.querySelector(".workTime");
+// raname functions!----------------------------------
 
-const resetTimerBtn = document.querySelector(".resetTimerBtn");
+const breakBtnMinus = document.querySelector(".break-btn-minus");
+const breakBtnPlus = document.querySelector(".break-btn-plus");
+const workBtnMinus = document.querySelector(".work-btn-minus");
+const workBtnPlus = document.querySelector(".work-btn-plus");
+const workTime = document.querySelector(".work-time");
+
+const resetTimerBtn = document.querySelector(".reset-timer-btn");
 const startTimerBtn = document.querySelector(".circle");
 const timer = document.querySelector(".timer");
 
-let workStartMin = 0;
+let start = 25;
+let workStartMin = 25;
 let workStartSec = 0;
-let endMin = 25;
+let endMin = 0;
 
 // variable to store our intervalID
 let nIntervId;
 
 startTimerBtn.addEventListener("click", changeColor);
-resetTimerBtn.addEventListener("click", stopTextColor);
+resetTimerBtn.addEventListener("click", resetTimer);
 workBtnMinus.addEventListener("click", function () {
-  endMin--;
-  workTime.innerHTML = endMin;
+  start--;
+  workTime.innerHTML = start;
+  workStartMin = start;
 });
 workBtnPlus.addEventListener("click", function () {
-  endMin++;
-  workTime.innerHTML = endMin;
+  start++;
+  workTime.innerHTML = start;
+  workStartMin = start;
 });
 
 function changeColor() {
@@ -36,25 +41,37 @@ function changeColor() {
 }
 
 function flashText() {
-  checkTime();
+  if (workStartMin === endMin && workStartSec === 0) {
+    stopTextColor();
+    return;
+  }
+
+  if (workStartSec === 0) {
+    workStartMin--;
+    workStartSec = 59;
+  }
+
+  startTimerBtn.classList.toggle("ripples");
   timer.innerHTML = `${workStartMin}:${workStartSec}`;
-  workStartSec++;
+  workStartSec--;
 }
 
 function stopTextColor() {
   clearInterval(nIntervId);
   // release our intervalID from the variable
   nIntervId = null;
-  workStartMin = 0;
+  startTimerBtn.classList.remove("ripples");
+  workStartMin = start;
   workStartSec = 0;
-  timer.innerHTML = `${workStartMin}:${workStartSec}`;
+  timer.innerHTML = "00:00";
 }
 
-function checkTime() {
-  if (workStartMin === endMin) {
-    stopTextColor();
-  } else if (workStartSec === 60) {
-    workStartMin++;
-    workStartSec = 0;
-  }
+function resetTimer() {
+  clearInterval(nIntervId);
+  // release our intervalID from the variable
+  nIntervId = null;
+  startTimerBtn.classList.remove("ripples");
+  workStartMin = start;
+  workStartSec = 0;
+  timer.innerHTML = `${workStartMin}:${workStartSec}0`;
 }

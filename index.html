@@ -5,28 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="main.js" defer></script>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Delius+Unicase:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <title>Assignment - Pomodoro Clock</title>
   </head>
   <body>
     <div class="container">
-      <div class="buttonsSection">
+      <div class="buttons-section">
         <div class="btn1">
-          <h2>BREAK:</h2>
-          <button class="breakBtnMinus btn" type="button">-</button>
-          <span class="breakTime">5</span>
-          <button class="breakBtnPlus btn" type="button">+</button>
-        </div>
-        <div class="resetSection">
-          <button class="resetTimerBtn" type="button">RESET</button>
+          <h1>BREAK:</h1>
+          <button class="break-btn-minus btn" type="button">-</button>
+          <span class="break-time">5</span>
+          <button class="break-btn-plus btn" type="button">+</button>
         </div>
         <div class="btn2">
-          <h2>WORK:</h2>
-          <button class="workBtnMinus btn" type="button">-</button>
-          <span class="workTime">25</span>
-          <button class="workBtnPlus btn" type="button">+</button>
+          <h1>WORK:</h1>
+          <button class="work-btn-minus btn" type="button">-</button>
+          <span class="work-time">25</span>
+          <button class="work-btn-plus btn" type="button">+</button>
         </div>
       </div>
-      <div class="circle"><span class="timer">0:0</span></div>
+      <div class="circle"><span class="timer">25:00</span></div>
+      <div class="reset-section">
+        <button class="reset-timer-btn btn" type="button">RESET</button>
+      </div>
     </div>
   </body>
 </html>
