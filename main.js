@@ -1,7 +1,5 @@
 "use script";
 
-const breakBtnMinus = document.querySelector(".break-btn-minus");
-const breakBtnPlus = document.querySelector(".break-btn-plus");
 const workBtnMinus = document.querySelector(".work-btn-minus");
 const workBtnPlus = document.querySelector(".work-btn-plus");
 const workTime = document.querySelector(".work-time");
@@ -14,6 +12,8 @@ let start = 25;
 let workStartMin = 25;
 let workStartSec = 0;
 let endMin = 0;
+
+let circleBackgroundPositionY = 0; // start position = 0px
 
 // variable to store our interval
 let interval;
@@ -42,7 +42,7 @@ function startTimer() {
 
 function timer() {
   if (workStartMin === endMin && workStartSec === 0) {
-    stopTimer();
+    endTimer();
     return;
   }
 
@@ -54,9 +54,12 @@ function timer() {
   startTimerBtn.classList.toggle("ripples");
   timerText.innerHTML = `${workStartMin}:${workStartSec}`;
   workStartSec--;
+  let backgroundOffsetStep = 250 / (start * 60); // 250px - height of the circle; start - timer time
+  circleBackgroundPositionY += backgroundOffsetStep;
+  startTimerBtn.style.backgroundPositionY = `${circleBackgroundPositionY}px`;
 }
 
-function stopTimer() {
+function endTimer() {
   clearInterval(interval);
   // release our intervalID from the variable
   interval = null;
@@ -74,4 +77,6 @@ function resetTimer() {
   workStartMin = start;
   workStartSec = 0;
   timerText.innerHTML = `${workStartMin}:${workStartSec}0`;
+  circleBackgroundPositionY = 0;
+  startTimerBtn.style.backgroundPositionY = `${circleBackgroundPositionY}px`;
 }
